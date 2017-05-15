@@ -1,0 +1,54 @@
+Method is source: "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>"
+Method is text: "Через два удлинителя сварщик соединился с электричеством.Розетки лежали на асфальте и дождь падал в них.Сварщик далеко не 6 разряда, понял я"
+Method is uri: #<Addressable::URI:0x3fd58a340d74 URI:https://twitter.com/ErrorSoul/status/850389376580431873>
+Method is metadata:     <null>
+Method is user: #<Twitter::User id=74446564>
+Method is url: #<Addressable::URI:0x3fd58a340d74 URI:https://twitter.com/ErrorSoul/status/850389376580431873>
+Method is lang:       "ru"
+Method is source?:       true
+Method is full_text: "Через два удлинителя сварщик соединился с электричеством.Розетки лежали на асфальте и дождь падал в них.Сварщик далеко не 6 разряда, понял я"
+Method is text?:       true
+Method is user?:       true
+Method is favorites_count:          0
+Method is lang?:       true
+Method is filter_level:     <null>
+Method is in_reply_to_screen_name:     <null>
+Method is favorite_count:          0
+Method is in_reply_to_status_id:     <null>
+Method is in_reply_to_user_id:     <null>
+Method is retweet_count:          0
+Method is favoriters_count:          0
+Method is in_reply_to_tweet_id:     <null>
+Method is reply?:      false
+Method is in_reply_to_user_id?:      false
+Method is retweeters_count:          0
+Method is geo:     <null>
+Method is place:     <null>
+Method is retweeted_status:     <null>
+Method is quoted_status:     <null>
+Method is current_user_retweet:     <null>
+Method is retweeted_tweet:     <null>
+Method is retweet?:      false
+Method is retweeted_status?:      false
+Method is retweeted_tweet?:      false
+Method is quoted_tweet:     <null>
+Method is quote?:      false
+Method is quoted_status?:      false
+Method is quoted_tweet?:      false
+Method is favorited:      false
+Method is possibly_sensitive:        nil
+Method is retweeted:      false
+Method is truncated:      false
+Method is filter_level?:      false
+Method is in_reply_to_screen_name?:      false
+Method is favorite_count?:       true
+Method is in_reply_to_status_id?:      false
+Method is retweet_count?:       true
+Method is geo?:      false
+Method is metadata?:      false
+Method is place?:      false
+Method is current_user_retweet?:      false
+Method is favorited?:      false
+Method is possibly_sensitive?:      false
+Method is retweeted?:      false
+Method is truncated?:      false
