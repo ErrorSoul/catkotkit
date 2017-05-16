@@ -28,10 +28,5 @@ response = RestClient.get(ENV["CAT_API_URL"], params: PARAMS)
 
 if result = REG.match(response.body)
   image_url = result[1]
-
-  open('image.png', 'wb') do |file|
-    file << open(image_url).read
-  end
+  # client.update_with_media("Source url: #{image_url}", open(image_url))
 end
-
-#client.update_with_media("Source url: #{image_url}", open(image_url))
