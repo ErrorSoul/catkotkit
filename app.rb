@@ -16,12 +16,12 @@ PARAMS = {
   size: 'med'
 }
 
-# client = Twitter::REST::Client.new do |config|
-#   config.consumer_key        = ENV["CONSUMER_KEY"]
-#   config.consumer_secret     = ENV["CONSUMER_SECRET"]
-#   config.access_token        = ENV["OAUTH_TOKEN"]
-#   config.access_token_secret = ENV["OAUTH_TOKEN_SECRET"]
-# end
+client = Twitter::REST::Client.new do |config|
+  config.consumer_key        = ENV["CONSUMER_KEY"]
+  config.consumer_secret     = ENV["CONSUMER_SECRET"]
+  config.access_token        = ENV["OAUTH_TOKEN"]
+  config.access_token_secret = ENV["OAUTH_TOKEN_SECRET"]
+end
 
 
 
@@ -49,11 +49,11 @@ def post_cat_image_every_hour(client)
 
     puts "TEXT SAMPLE IS #{text_sample}".blue
     DB["old_tweets"] = new_tweets
-    puts " Write tweet from db ".green
+    puts " Write tweet to db ".green
 
   end
-  #client.update_with_media(CAT_TEXTS, open(image_url))
+  client.update_with_media(text_sample, open(image_url))
 end
 
 
-15.times do post_cat_image_every_hour('client') end
+post_cat_image_every_hour(client)
