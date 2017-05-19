@@ -16,6 +16,8 @@ PARAMS = {
   size: 'med'
 }
 
+HASHTAGS = ['#котовести', '#котоновости'].join(' ')
+
 client = Twitter::REST::Client.new do |config|
   config.consumer_key        = ENV["CONSUMER_KEY"]
   config.consumer_secret     = ENV["CONSUMER_SECRET"]
@@ -43,7 +45,6 @@ def post_cat_image_every_hour(client)
         end
         old_tweets + [text_sample]
       else
-
         [text_sample]
       end
 
@@ -52,7 +53,10 @@ def post_cat_image_every_hour(client)
     puts " Write tweet to db ".green
 
   end
-  client.update_with_media(text_sample, open(image_url))
+
+  tweet_text = "#{text_sample} #{HASHTAGS}"
+  puts tweet_text
+  client.update_with_media(tweet_text, open(image_url))
 end
 
 

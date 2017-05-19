@@ -2,3 +2,4 @@
 .config
 config/my_env.yml
 db/*
+log/*
