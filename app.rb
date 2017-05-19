@@ -16,7 +16,7 @@ PARAMS = {
   size: 'med'
 }
 
-HASHTAGS = ['#котовести', '#котоновости'].join(' ')
+HASHTAGS = [u'#котовести', u'#котоновости'].join(' ')
 
 client = Twitter::REST::Client.new do |config|
   config.consumer_key        = ENV["CONSUMER_KEY"]
