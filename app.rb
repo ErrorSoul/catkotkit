@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rubygems'
 require 'bundler/setup'
 require 'twitter'
@@ -16,7 +17,7 @@ PARAMS = {
   size: 'med'
 }
 
-HASHTAGS = [u'#котовести', u'#котоновости'].join(' ')
+HASHTAGS = ['#котовести', '#котоновости'].join(' ')
 
 client = Twitter::REST::Client.new do |config|
   config.consumer_key        = ENV["CONSUMER_KEY"]
