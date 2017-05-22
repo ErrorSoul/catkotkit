@@ -1,0 +1,2 @@
+module CatImageAPI
+end
