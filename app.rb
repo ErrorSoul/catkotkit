@@ -9,15 +9,6 @@ require './textio'
 require './lib/db_store'
 require './lib/cat_image_api'
 
-REG = /src\s*=\s*"([^"]*)"/
-
-PARAMS = {
-  format: "html",
-  results_per_page: 1,
-  type: 'png,jpg, gif',
-  size: 'med, full'
-}
-
 HASHTAGS = ['#котовести', '#котоновости'].join(' ')
 
 client = Twitter::REST::Client.new do |config|
@@ -30,12 +21,7 @@ end
 db_store = DB_Store.new
 
 def post_cat_image_every_hour(client, db_store)
-  response = RestClient.get(ENV["CAT_API_URL"], params: PARAMS)
-
-  if result = REG.match(response.body)
-    puts " GET image from cat api ".green
-    image_url = result[1]
-
+  if image_url = CatImageAPI.get_image
     old_tweets = db_store.old_tweets
     puts "OLD tweets is #{old_tweets.inspect}"
     text_sample = CAT_TEXTS.sample
@@ -54,11 +40,12 @@ def post_cat_image_every_hour(client, db_store)
     db_store.set_old_tweets(new_tweets)
     puts " Write tweet to db ".green
 
+
+    tweet_text = "#{text_sample} #{HASHTAGS}"
+    puts tweet_text
+    client.update_with_media(tweet_text, open(image_url))
   end
 
-  tweet_text = "#{text_sample} #{HASHTAGS}"
-  puts tweet_text
-  #client.update_with_media(tweet_text, open(image_url))
 end
 
 
