@@ -13,7 +13,8 @@ class DB_Store
     DB[attr.to_s] = value
   end
 
-  def set_old_tweets(old_tweets)
+  def update_old_tweets(old_tweets)
     DB['old_tweets'] = old_tweets
+    puts "Write tweet to db".green
   end
 end
