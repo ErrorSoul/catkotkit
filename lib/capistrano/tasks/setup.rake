@@ -34,3 +34,5 @@ namespace :setup do
 end
 
 after "deploy:publishing", "setup:upload_yml"
+after "deploy:publishing", "foreman:export"
+after "deploy:publishing", "foreman:restart"

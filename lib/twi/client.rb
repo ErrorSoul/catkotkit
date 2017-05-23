@@ -11,7 +11,7 @@ module Twi
 
     def send_hour_tweet(image_url, old_tweets, debug=false)
       tweet_text, new_tweets = prepare_text_tweet(old_tweets)
-      puts "TEXT SAMPLE IS #{tweet_text}".blue
+      LOGGER.info "TEXT SAMPLE IS #{tweet_text}".blue
       @client.update_with_media(tweet_text, open(image_url)) unless debug
       [tweet_text, new_tweets]
     end

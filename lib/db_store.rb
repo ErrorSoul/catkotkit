@@ -20,12 +20,12 @@ class DB_Store
 
   def update_old_tweets(old_tweets)
     set(:old_tweets, old_tweets)
-    puts "Write new tweets to db".green
+    LOGGER.info "Write new tweets to db".green
   end
 
   def update_last_reply(last_reply_id)
     set(:last_reply_id, last_reply_id)
-    puts "Write last reply #{last_reply_id} to db".green
+    LOGGER.info "Write last reply #{last_reply_id} to db".green
   end
 
   def hour_tweet_time
@@ -35,7 +35,7 @@ class DB_Store
   def update_hour_tweet_time
     time = Time.now + 3600
     set(:hour_tweet_time, Time.now + 3600) # 60 s * 60 (1 hour)
-    puts "Update hour tweet time to #{time}".rjust(60, '.').yellow
+    LOGGER.info "Update hour tweet time to #{time}".rjust(60, '.').yellow
   end
 
   def reply_time
@@ -45,7 +45,7 @@ class DB_Store
   def update_reply_time
     time = Time.now + 25
     set(:reply_time, time) # 25 sec
-    puts "Update reply time to #{time}".rjust(60, '.').yellow
+    LOGGER.info "Update reply time to #{time}".rjust(60, '.').yellow
   end
 
   private

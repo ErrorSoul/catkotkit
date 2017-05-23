@@ -4,12 +4,16 @@ require 'bundler/setup'
 require 'twitter'
 require 'colorize'
 require 'open-uri'
+require 'logger'
 require './boot'
 require './textio'
 require './lib/db_store'
 require './lib/cat_image_api'
 require './lib/twi/client.rb'
 
+LOGGER = Logger.new('log/logfile.log', 10, 1024000)
+
+$stdout.sync = true
 REG = /\b[Cc]\s*[Aa]\s*[Tt]\b/ # From A. Pustobaev
 # REG = /\bc\s*a\s*t\b/
 db_store = DB_Store.new
@@ -18,12 +22,12 @@ client   = Twi::Client.new
 def post_cat_image_every_hour(client, db_store)
   if image_url = CatImageAPI.get_image
     old_tweets = db_store.old_tweets
-    puts "OLD tweets is #{old_tweets.inspect}"
+    LOGGER.info "OLD tweets is #{old_tweets.inspect}"
 
     tweet_text, new_tweets  = client.send_hour_tweet(image_url, old_tweets, false)
 
     db_store.update_old_tweets(new_tweets)
-    puts tweet_text
+    LOGGER.info tweet_text
   end
 end
 
@@ -35,7 +39,7 @@ def replying(client, db_store)
   unless mentions.empty?
     mentions.select { |tweet| tweet.full_text =~ REG }.map do |tweet|
       if image_url = CatImageAPI.get_image
-        puts image_url
+        LOGGER.info image_url
         #client.reply(tweet, image_url)
       end
     end
@@ -51,12 +55,12 @@ end
 loop do
   sleep(5)
   time = Time.now
-  puts "Time now is #{time}".blue
+  LOGGER.info "Time now is #{time}".blue
   hour_tweet_time  = db_store.hour_tweet_time
   reply_tweet_time = db_store.reply_time
 
-  puts "HOUR TWEET TIME is #{hour_tweet_time}".red
-  puts "REPLY TIME is #{reply_tweet_time}".red
+  LOGGER.info "HOUR TWEET TIME is #{hour_tweet_time}".red
+  LOGGER.info "REPLY TIME is #{reply_tweet_time}".red
 
   if time >=  hour_tweet_time
     Thread.new do
