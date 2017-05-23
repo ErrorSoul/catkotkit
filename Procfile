@@ -1,2 +1,6 @@
 worker: bundle exec ruby app.rb
-log: tail -f -n 40 log/logfile.log
+# OSX
+
+# log: tail -f -n 40 log/logfile.log
+
+log: tail -f log/logfile.log
