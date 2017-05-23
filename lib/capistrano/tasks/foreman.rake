@@ -3,7 +3,7 @@ namespace :foreman do
   task :export do
     on roles(:app) do
       within current_path do
-        execute :rbenv, :exec, "bundle exec foreman export upstart /etc/init --procfile=./Procfile -a #{fetch(:application)} -u #{fetch(:user)} -l #{current_path}/log"
+        execute :rbenv, :exec, "bundle exec foreman export upstart /etc/init --procfile=./Procfile -a #{fetch(:application)} -u #{fetch(:user)} -l #{shared_path}/log"
       end
     end
 

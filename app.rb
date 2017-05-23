@@ -13,6 +13,7 @@ require './lib/twi/client.rb'
 
 LOGGER = Logger.new('log/logfile.log', 10, 1024000)
 
+system('dfadsfdsafadsfadsfadsf.txt')
 $stdout.sync = true
 REG = /\b[Cc]\s*[Aa]\s*[Tt]\b/ # From A. Pustobaev
 # REG = /\bc\s*a\s*t\b/
