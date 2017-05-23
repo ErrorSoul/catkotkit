@@ -23,7 +23,7 @@ desc "Start the application services"
   task :stop do
     on roles(:app) do
       within current_path do
-        execute :bundle, :exec, :foreman, :stop, "catkotkit"
+        execute :sudo, :catkotkit, :stop
       end
     end
   end
@@ -32,9 +32,10 @@ desc "Start the application services"
   task :restart do
 
       on roles(:app) do
-        within current_path do
-          sudo "bundle exec foreman start || sudo bundle exec foreman restart"
-        end
+
+        sudo "catkotkit start || sudo catkotkit restart"
+
+
     end
   end
 end
