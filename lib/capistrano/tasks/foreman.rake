@@ -3,7 +3,7 @@ namespace :foreman do
   task :export do
     on roles(:app) do
       within current_path do
-        execute :rbenv, :exec, "bundle exec foreman export upstart /etc/init --procfile=./Procfile -a #{fetch(:application)} -u #{fetch(:user)} -l #{current_path}/log"
+        execute :rbenv, :exec,:bundle, :exec,  "foreman export upstart /etc/init --procfile=./Procfile -a #{fetch(:application)} -u #{fetch(:user)} -l #{current_path}/log"
       end
     end
 
@@ -13,21 +13,25 @@ namespace :foreman do
 desc "Start the application services"
   task :start do
     on roles(:app) do
-      sudo "start #{fetch(:application)}"
+      within current_path do
+        execute :sudo,  :start, fetch(:application)
+      end
     end
   end
 
   desc "Stop the application services"
   task :stop do
     on roles(:app) do
-      sudo "stop #{fetch(:application)}"
+      within current_path do
+        execute :sudo, :stop, :catkotkit
+      end
     end
   end
 
   desc "Restart the application services"
   task :restart do
     on roles(:app) do
-      run "sudo start #{fetch(:application)} || sudo restart #{fetch(:application)}"
+       execute :sudo,  "stop #{fetch(:application)} || sudo restart #{fetch(:application)}"
     end
   end
 end

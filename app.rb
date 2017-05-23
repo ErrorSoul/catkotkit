@@ -54,7 +54,7 @@ end
 
 
 loop do
-  sleep(5)
+
   time = Time.now
   LOGGER.info "Time now is #{time}".blue
   hour_tweet_time  = db_store.hour_tweet_time
