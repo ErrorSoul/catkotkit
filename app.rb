@@ -53,7 +53,7 @@ loop do
   time = Time.now
   puts "Time now is #{time}".blue
   hour_tweet_time  = db_store.hour_tweet_time
-  reply_tweet_time = db_storereply_time
+  reply_tweet_time = db_store.reply_time
 
   puts "HOUR TWEET TIME is #{hour_tweet_time}".red
   puts "REPLY TIME is #{reply_tweet_time}".red

@@ -32,3 +32,5 @@ namespace :setup do
   # end
 
 end
+
+after "deploy:publishing", "setup:upload_yml"
