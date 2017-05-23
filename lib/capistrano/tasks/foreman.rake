@@ -14,7 +14,7 @@ desc "Start the application services"
   task :start do
     on roles(:app) do
       within current_path do
-        execute :sudo,  :start, :catkotkit
+        execute "sudo start catkotkit"
       end
     end
   end
@@ -22,16 +22,14 @@ desc "Start the application services"
   desc "Stop the application services"
   task :stop do
     on roles(:app) do
-      within current_path do
-        execute :sudo, :stop, :catkotkit
-      end
+      sudo "foreman stop"
     end
   end
 
   desc "Restart the application services"
   task :restart do
     on roles(:app) do
-       execute :sudo,  "start #{fetch(:application)} || sudo restart #{fetch(:application)}"
+       sudo "start #{fetch(:application)} || sudo restart #{fetch(:application)}"
     end
   end
 end
