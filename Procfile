@@ -1,4 +1,4 @@
-worker: ruby app.rb
+web: ruby app.rb
 # OSX
 
 # log: tail -f -n 40 log/logfile.log
