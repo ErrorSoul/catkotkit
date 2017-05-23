@@ -11,7 +11,7 @@ require './lib/db_store'
 require './lib/cat_image_api'
 require './lib/twi/client.rb'
 
-LOGGER = Logger.new('log/logfile.log', 10, 1024000)
+LOGGER = Logger.new('log/logfile.log')
 
 system( 'touch dfadsfdsafadsfadsfadsf.txt')
 $stdout.sync = true

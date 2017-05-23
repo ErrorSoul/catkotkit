@@ -2,12 +2,13 @@ namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export do
     on roles(:app) do
-
-     run "cd #{release_path} && sudo bundle exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{fetch(:user)} -l #{fetch(:shared_path)}/log"
-
+      within current_path do
+        execute :rbenv, :exec, "bundle exec foreman export upstart /etc/init --procfile=./Procfile -a #{fetch(:application)} -u #{fetch(:user)} -l #{current_path}/log"
+      end
     end
 
   end
+
 
 desc "Start the application services"
   task :start do
