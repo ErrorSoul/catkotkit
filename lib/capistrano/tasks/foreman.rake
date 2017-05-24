@@ -21,7 +21,7 @@ namespace :foreman do
         #execute "cd #{current_path} && rbenv sudo bundle exec foreman export upstart /etc/init -a catkotkit -u #{fetch(:deploy_user)} -l #{shared_path}/log -d #{current_path}"
         #execute :sudo, :rbenv,  "bundle exec foreman export upstart /etc/init -a catkotkit -u #{fetch(:deploy_user)} -l #{shared_path}/log -d #{current_path}"
 
-        execute :rbenv, :sudo,  "foreman export upstart /etc/init -a #{fetch(:application)} -u #{fetch(:deploy_user)} -l #{shared_path}/log"
+        execute :rbenv, :sudo,  "bundle exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{fetch(:deploy_user)} -l #{shared_path}/log"
       end
     end
   end

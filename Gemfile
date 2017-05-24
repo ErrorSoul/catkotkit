@@ -11,3 +11,4 @@ gem "capistrano", "~> 3.8"
 gem "capistrano-bundler"
 gem 'capistrano-rbenv'
 gem "airbrussh", require: false
+gem 'foreman'
