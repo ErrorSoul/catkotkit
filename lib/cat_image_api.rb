@@ -8,7 +8,7 @@ module CatImageAPI
   PARAMS = {
     format: "html",
     results_per_page: 1,
-    type: 'png,jpg, gif',
+    type: 'png,jpg',
     size: 'med, full'
   }
 

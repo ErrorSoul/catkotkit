@@ -55,7 +55,7 @@ def replying(client, db_store)
 end
 
 loop do
-  sleep(5)
+  sleep rand(5..10)
   time = Time.now
   LOGGER.info "Time now is #{time}".blue
   hour_tweet_time  = db_store.hour_tweet_time
@@ -66,22 +66,13 @@ loop do
 
   if time >= hour_tweet_time
     puts 'check hour'
-    Thread.new do
-      #post_cat_image_every_hour(client, db_store)
-      db_store.update_hour_tweet_time
-    end
+    post_cat_image_every_hour(client, db_store)
+    db_store.update_hour_tweet_time
   end
 
   if time >= reply_tweet_time
     puts 'check reply'
-    Thread.new do
-      replying(client, db_store)
-      db_store.update_reply_time
-    end
+    replying(client, db_store)
+    db_store.update_reply_time
   end
-
-
-
-  #replying(client, db_store)
-  #post_cat_image_every_hour(client, db_store)
 end
