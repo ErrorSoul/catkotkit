@@ -38,8 +38,10 @@ def replying(client, db_store)
   LOGGER.info "REPLYING START"
   last_reply_id = db_store.last_reply_id
   mentions = client.mentions_timeline(since_id: last_reply_id)
+  LOGGER.info mentions.inspect
 
   unless mentions.empty?
+    LOGGER.info 'mentions exist'
     mentions.select { |tweet| tweet.full_text =~ REG }.map do |tweet|
       if image_url = CatImageAPI.get_image
         LOGGER.info image_url
@@ -73,7 +75,7 @@ loop do
   if time >= reply_tweet_time
     puts 'check reply'
     Thread.new do
-      #replying(client, db_store)
+      replying(client, db_store)
       db_store.update_reply_time
     end
   end
