@@ -41,7 +41,7 @@ def replying(client, db_store)
     mentions.select { |tweet| tweet.full_text =~ REG }.map do |tweet|
       if image_url = CatImageAPI.get_image
         LOGGER.info image_url
-        #client.reply(tweet, image_url)
+        client.reply(tweet, image_url)
       end
     end
 
