@@ -21,6 +21,7 @@ db_store = DB_Store.new
 client   = Twi::Client.new
 
 def post_cat_image_every_hour(client, db_store)
+  LOGGER.info "hour image start"
   if image_url = CatImageAPI.get_image
     old_tweets = db_store.old_tweets
     LOGGER.info "OLD tweets is #{old_tweets.inspect}"
@@ -34,6 +35,7 @@ end
 
 
 def replying(client, db_store)
+  LOGGER.info "REPLYING START"
   last_reply_id = db_store.last_reply_id
   mentions = client.mentions_timeline(since_id: last_reply_id)
 
@@ -60,14 +62,16 @@ loop do
   LOGGER.info "HOUR TWEET TIME is #{hour_tweet_time}".red
   LOGGER.info "REPLY TIME is #{reply_tweet_time}".red
 
-  if time >=  hour_tweet_time
+  if time >= hour_tweet_time
+    puts 'check hour'
     Thread.new do
       post_cat_image_every_hour(client, db_store)
       db_store.update_hour_tweet_time
     end
   end
 
-  if time >=  reply_tweet_time
+  if time >= reply_tweet_time
+    puts 'check reply'
     Thread.new do
       replying(client, db_store)
       db_store.update_reply_time
