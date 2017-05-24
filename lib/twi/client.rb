@@ -3,6 +3,7 @@ module Twi
 
     #HASHTAGS = ['#котовести', '#котоновости'].join(' ')
     HASHTAGS  = ['#catnews',  '#catstories'].join(' ')
+
     attr_reader :client
 
     def initialize
