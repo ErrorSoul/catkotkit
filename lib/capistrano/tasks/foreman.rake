@@ -21,41 +21,18 @@ namespace :foreman do
         #execute "cd #{current_path} && rbenv sudo bundle exec foreman export upstart /etc/init -a catkotkit -u #{fetch(:deploy_user)} -l #{shared_path}/log -d #{current_path}"
         #execute :sudo, :rbenv,  "bundle exec foreman export upstart /etc/init -a catkotkit -u #{fetch(:deploy_user)} -l #{shared_path}/log -d #{current_path}"
 
-        execute :rbenv, :sudo,  "foreman export upstart /etc/init -t foreman/export/my_upstart -a #{fetch(:application)} -u #{fetch(:deploy_user)} -l #{current_path}/log"
+        execute :rbenv, :sudo,  "foreman export upstart /etc/init -a #{fetch(:application)} -u #{fetch(:deploy_user)} -l #{shared_path}/log"
       end
     end
   end
 
 
-desc "Start the application services"
-  task :start do
+[:start, :stop, :restart, :status].each do |action|
+  desc "#{action} the foreman processes"
+  task action do
     on roles(:app) do
-      within current_path do
-        execute :sudo, :start, :catkotkit
-      end
+      execute "sudo service catkotkit #{action}"
     end
   end
-
-  desc "Stop the application services"
-  task :stop do
-    on roles(:app) do
-      within current_path do
-        execute :sudo, :catkotkit, :stop
-      end
-    end
-  end
-
-  desc "Restart the application services"
-  task :restart do
-
-      on roles(:app) do
-
-        sudo "catkotkit start || sudo catkotkit restart"
-
-
-    end
-  end
-
-
-
+end
 end
