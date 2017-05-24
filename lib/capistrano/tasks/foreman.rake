@@ -17,7 +17,12 @@ namespace :foreman do
         puts current_path
         puts shared_path
         puts "#{fetch(:deploy_user)}"
-        #execute "echo PATH=\"$PATH\"\n > #{current_path}/.env"
+        with path: '/usr/local/bin/rbenv/shims:$PATH' do
+          execute :echo, "PATH=\"$PATH\" > .env"
+        end
+        #
+
+        #runner "echo PATH=\"$PATH\"\n > #{current_path}/.env"
         #execute "cd #{current_path} && rbenv sudo bundle exec foreman export upstart /etc/init -a catkotkit -u #{fetch(:deploy_user)} -l #{shared_path}/log -d #{current_path}"
         #execute :sudo, :rbenv,  "bundle exec foreman export upstart /etc/init -a catkotkit -u #{fetch(:deploy_user)} -l #{shared_path}/log -d #{current_path}"
 
