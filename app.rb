@@ -65,7 +65,7 @@ loop do
   if time >= hour_tweet_time
     puts 'check hour'
     Thread.new do
-      post_cat_image_every_hour(client, db_store)
+      #post_cat_image_every_hour(client, db_store)
       db_store.update_hour_tweet_time
     end
   end
@@ -73,7 +73,7 @@ loop do
   if time >= reply_tweet_time
     puts 'check reply'
     Thread.new do
-      replying(client, db_store)
+      #replying(client, db_store)
       db_store.update_reply_time
     end
   end
