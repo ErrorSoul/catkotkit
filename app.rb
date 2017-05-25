@@ -28,12 +28,15 @@ end
 log_file = File.open("log/debug.log", "a")
 LOGGER = Logger.new MultiIO.new(STDOUT, log_file)
 #LOGGER = Logger.new('log/logfile.log')
-
-system( 'touch dfadsfdsafadsfadsfadsf.txt')
-puts 'dsfasdfadsfaf'
 $stdout.sync = true
-REG = /\b[Cc]\s*[Aa]\s*[Tt]\b/ # From A. Pustobaev
+# check for cat, kitty, meow
+# REG = /\b[Cc]\s*[Aa]\s*[Tt]\b/ # From A. Pustobaev
 # REG = /\bc\s*a\s*t\b/  \i
+
+REG_ARRAY = [/\b[Cc]\s*a{1,}\s*[Tt]\b/i, /\b[k]\s*[i]\s*[t]\s*[t]\s*[y]\b/i, /\b[m]\s*[e]\s*o{1,}\s*[w]\b/i]
+
+REGULAR = Regexp.union(REG_ARRAY)
+
 db_store = DB_Store.new
 client   = Twi::Client.new
 
@@ -59,7 +62,7 @@ def replying(client, db_store)
 
   unless mentions.empty?
     LOGGER.info 'mentions exist'
-    mentions.select { |tweet| tweet.full_text =~ REG }.map do |tweet|
+    mentions.select { |tweet| tweet.full_text =~ REGULAR }.map do |tweet|
       if image_url = CatImageAPI.get_image
         LOGGER.info image_url
         sleep(2)
