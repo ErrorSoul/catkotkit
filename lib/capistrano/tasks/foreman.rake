@@ -17,6 +17,7 @@ namespace :foreman do
   task :export do
     on roles(:app) do
       within current_path do
+          execute :sudo, "rm -rf /etc/init/#{fetch(:application)}*"
           with path: '/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH' do
             pt = capture(:echo, 'PATH=\"$PATH\"')
 
