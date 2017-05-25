@@ -82,7 +82,7 @@ loop do
   LOGGER.info "HOUR TWEET TIME is #{hour_tweet_time}".red
   LOGGER.info "REPLY TIME is #{reply_tweet_time}".red
 
-  if time >= reply_tweet_time
+  if time >= hour_tweet_time
     puts 'check hour'
     post_cat_image_every_hour(client, db_store)
     db_store.update_hour_tweet_time
