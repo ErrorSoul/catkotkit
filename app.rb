@@ -11,12 +11,29 @@ require './lib/db_store'
 require './lib/cat_image_api'
 require './lib/twi/client.rb'
 
-LOGGER = Logger.new('log/logfile.log')
+class MultiIO
+  def initialize(*targets)
+     @targets = targets
+  end
+
+  def write(*args)
+    @targets.each {|t| t.write(*args)}
+  end
+
+  def close
+    @targets.each(&:close)
+  end
+end
+
+log_file = File.open("log/debug.log", "a")
+LOGGER = Logger.new MultiIO.new(STDOUT, log_file)
+#LOGGER = Logger.new('log/logfile.log')
 
 system( 'touch dfadsfdsafadsfadsfadsf.txt')
+puts 'dsfasdfadsfaf'
 $stdout.sync = true
 REG = /\b[Cc]\s*[Aa]\s*[Tt]\b/ # From A. Pustobaev
-# REG = /\bc\s*a\s*t\b/
+# REG = /\bc\s*a\s*t\b/  \i
 db_store = DB_Store.new
 client   = Twi::Client.new
 
@@ -45,6 +62,7 @@ def replying(client, db_store)
     mentions.select { |tweet| tweet.full_text =~ REG }.map do |tweet|
       if image_url = CatImageAPI.get_image
         LOGGER.info image_url
+        sleep(2)
         client.reply(tweet, image_url)
       end
     end
@@ -64,7 +82,7 @@ loop do
   LOGGER.info "HOUR TWEET TIME is #{hour_tweet_time}".red
   LOGGER.info "REPLY TIME is #{reply_tweet_time}".red
 
-  if time >= hour_tweet_time
+  if time >= reply_tweet_time
     puts 'check hour'
     post_cat_image_every_hour(client, db_store)
     db_store.update_hour_tweet_time
@@ -75,4 +93,11 @@ loop do
     replying(client, db_store)
     db_store.update_reply_time
   end
+end
+
+def most_retweeted_in_homeline(db_store)
+    last_homeline_tweet = db_store.last_periodic_tweet
+    periodic_tweets = client.take_periodic_tweets(since_id: last_homeline_tweet.id)
+    most_rt_tweets = search_most_rt(periodic_tweets)
+    db_store.update_most_retweeted_home(most_rt_tweets)
 end

@@ -4,7 +4,7 @@ namespace :setup do
   task :upload_yml do
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config"
-      upload! StringIO.new(File.read("config/my_env.yml")), "#{shared_path}/config/my_env.yml"
+      upload! StringIO.new(File.read("config/my_env.yml")), "#{current_path}/config/my_env.yml"
     end
   end
 
