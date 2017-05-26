@@ -2,7 +2,7 @@ module Twi
   class Client
 
     #HASHTAGS = ['#котовести', '#котоновости'].join(' ')
-    HASHTAGS  = ['#catnews',  '#catstories'].join(' ')
+    HASHTAGS  = ['#catnews', '#catstories', '#cat'].join(' ')
 
     attr_reader :client
 
