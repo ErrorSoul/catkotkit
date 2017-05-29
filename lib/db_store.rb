@@ -34,7 +34,7 @@ class DB_Store
 
   def update_hour_tweet_time
     time = Time.now + 3600
-    set(:hour_tweet_time, Time.now + 3600) # 60 s * 60 (1 hour)
+    set(:hour_tweet_time, Time.now + 7200) # 60 s * 60 (1 hour)
     LOGGER.info "Update hour tweet time to #{time}".rjust(60, '.').yellow
   end
 
