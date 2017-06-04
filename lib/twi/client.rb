@@ -45,7 +45,7 @@ module Twi
       text_sample = CAT_TEXTS.sample
 
       new_tweets =
-        if old_tweets.size < 9
+        if old_tweets.size < 33
           while old_tweets.include?(text_sample)
             text_sample = CAT_TEXTS.sample
           end
