@@ -54,9 +54,17 @@ module Twi
           [text_sample]
         end
 
-      tweet_text = "#{text_sample} #{HASHTAGS}"
+      tweet_text = correct_tweet_length(text_sample)
 
       [tweet_text, new_tweets]
+    end
+  end
+
+  def correct_tweet_length(text_sample)
+    if (140 - text_sample.size) < HASHTAGS.size
+      text_sample
+    else
+      "#{text_sample} #{HASHTAGS}"
     end
   end
 
